@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.portfolio.boardserver.mapper.UserProfileMapper">
+
+    <select id="getUserProfile" resultType="com.portfolio.boardserver.dto.UserDTO">
+        SELECT userId,
+                password,
+                nickname,
+                createTime,
+                isWithDraw,
+                status
+        FROM user
+        WHERE userId = #{id}
+    </select>
+
+    <insert id="insertUserProfile" parameterType="com.portfolio.boardserver.dto.UserDTO">
+        INSERT INTO user (userId, password, nickname, isWithDraw, status, isAdmin)
+        VALUES (#{userId}, #{password}, #{nickname}, #{isWithDraw}, #{status}, #{isAdmin})
+    </insert>
+
+    <update id="updateUserProfile" parameterType="com.portfolio.boardserver.dto.UserDTO">
+        UPDATE user
+        SET password = #{password},
+            nickname = #{nickname},
+            isWithDraw = #{isWithDraw},
+            status = #{status}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserProfile">
+        DELETE
+        FROM user
+        WHERE userId = #{id}
+    </delete>
+
+    <select id="findByIdAndPassword" resultType="com.portfolio.boardserver.dto.UserDTO">
+        SELECT id,
+            userId,
+            passWord,
+            nickName,
+            createTime,
+            isWithDraw,
+            status
+        FROM user
+        WHERE userId = #{id}
+            AND passWord = #{password}
+            AND status != 'DELETE'
+    </select>
+
+    <select id="idCheck" resultType="int">
+        SELECT COUNT(id)
+        FROM user
+        WHERE userId = #{userId}
+    </select>
+
+    <update id="updatePassword" parameterType="com.portfolio.boardserver.dto.UserDTO">
+        UPDATE user
+        SET password = #{password}
+        WHERE userId = #{userId}
+    </update>
+
+    <insert id="register">
+        INSERT INTO user (userId, passWord, nickName, createTime, isWithDraw, status)
+        VALUES (#{userId}, #{passWord}, #{nickName}, #{createTime}, #{isWithDraw}, #{status})
+    </insert>
+
+</mapper>
