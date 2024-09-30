@@ -4,7 +4,9 @@
 <mapper namespace="com.portfolio.boardserver.mapper.UserProfileMapper">
 
     <select id="getUserProfile" resultType="com.portfolio.boardserver.dto.UserDTO">
-        SELECT userId,
+        SELECT
+                id,
+                userId,
                 password,
                 nickname,
                 createTime,
