@@ -26,6 +26,10 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1'
+	// https://mvnrepository.com/artifact/org.springframework/spring-aop
+	implementation group: 'org.springframework', name: 'spring-aop', version: '6.1.12'
+	// https://mvnrepository.com/artifact/org.aspectj/aspectjweaver
+	implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.22.1'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

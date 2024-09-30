@@ -1,5 +1,6 @@
 package com.portfolio.boardserver.controller;
 
+import com.portfolio.boardserver.aop.LoginCheck;
 import com.portfolio.boardserver.dto.UserDTO;
 import com.portfolio.boardserver.dto.request.UserDeleteId;
 import com.portfolio.boardserver.dto.request.UserLoginRequest;
@@ -80,10 +81,11 @@ public class UserController {
 
     //비밀번호 변경
     @PatchMapping("password")
-    public ResponseEntity<LoginResponse> updateUserPassword(@RequestBody UserUpdatePasswordRequest userUpdatePasswordRequest,
+    @LoginCheck(type = LoginCheck.UserType.USER)
+    public ResponseEntity<LoginResponse> updateUserPassword(String accountId, @RequestBody UserUpdatePasswordRequest userUpdatePasswordRequest,
                                                             HttpSession session) {
         ResponseEntity<LoginResponse> responseEntity = null;
-        String Id = SessionUtil.getLoginMemberId(session);
+        String Id = accountId;
         String beforePassword = userUpdatePasswordRequest.getBeforePassword();
         String afterPassword = userUpdatePasswordRequest.getAfterPassword();
 
